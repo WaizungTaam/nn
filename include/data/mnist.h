@@ -1,3 +1,19 @@
+/* 
+ * Copyright 2016 Waizung Taam
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #ifndef NN_DATA_MINST_H_
 #define NN_DATA_MINST_H_
 
@@ -13,7 +29,7 @@ namespace data {
 class MNIST {
 public:
   MNIST() : path_("") {}
-  MNIST(const std::string& path_init) : path_(path_init) {}
+  explicit MNIST(const std::string& path_init) : path_(path_init) {}
   void load_train(tensor::Matrix<double>& img_data,
                   tensor::Matrix<double>& lbl_data) const {
     load_img_lbl(img_data, lbl_data, FILE_IMG_TRAIN, FILE_LBL_TRAIN);
@@ -115,7 +131,7 @@ private:
       img_data = tensor::Matrix<double>(stdvec_img);
       lbl_data = tensor::Matrix<double>(stdvec_lbl);
     } else {
-      throw "Cannot open " + img_name + ", " + lbl_name + ".";
+      throw "Cannot open " + img_name + ", " + lbl_name + "."; // TODO, Use standard exception
     }    
   }
 };
